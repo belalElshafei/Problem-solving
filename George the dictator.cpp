@@ -8,8 +8,7 @@ using namespace std;
 typedef long long ll;
 
 int main(){
-	int	n,k;
-	cin>>n>>k;
+	int	n,k;cin>>n>>k;
 	vector<int>v(n);
 	map<int,int> mp;
 	 
