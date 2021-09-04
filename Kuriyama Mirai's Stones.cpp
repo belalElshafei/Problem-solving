@@ -1,52 +1,52 @@
-//Problem link:=> https://codeforces.com/group/uIwyWI1OoG/contest/286425/problem/I
+//Problem link :=> https://codeforces.com/problemset/problem/433/B
 
 //By Belal Elshafei
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+using namespace  std;
+typedef  long  long ll;
 
-using namespace std;
-typedef long long ll;
-int main(){
-	int n;cin>>n;
-	vector<int> v1(n + 1);
-	vector<int> v2(n + 1);
-	vector<ll> v1Sum(n + 1);
-	vector<ll> v2Sum(n + 1);
-	v1[0] = 0;
-	v2[0] = 0;
-	v1Sum[0] = 0;
-	v2Sum[0] = 0;
-
-	ll sum1 = 0;
-	for(int i = 1; i < n + 1; i++){
-		cin>>v1[i];
-		sum1+=v1[i];
-		v1Sum[i] = sum1;
-	}
-	
-	v2 = v1;
-	
-	sort(v2.begin(),v2.end());
-	
-	ll sum2 = 0;
-	
-	for(int i = 1; i < n + 1; i++){
-		sum2+=v2[i];
-		v2Sum[i] = sum2;
-	}
-	
-	int m;cin>>m;
-	
-	for(int i = 0; i < m; i++){
-		int chos,l,r;cin>>chos>>l>>r;
-		ll res = 0;
-		if(chos == 1){
-			 res = v1Sum[r] - v1Sum[l - 1];
-		}else{
-			 res = v2Sum[r] - v2Sum[l - 1];
-		}
-		
-		cout<<res<<"\n";
-	}
-	
+void f() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
 }
+
+int main() {
+    f();
+
+    int n;cin>>n;
+    ll ordPre[n+1] = {0};
+    ll unordPre[n+1] = {0};
+    ll arr[n+1] = {0};
+
+    for(int i = 1; i <= n; i++){
+        cin>>arr[i];
+    }
+
+    for(int i = 1; i <= n; i++){
+        unordPre[i]+=unordPre[i - 1] + arr[i];
+    }
+
+    sort(arr+1,arr+n+1);
+
+    for(int i = 1; i <= n; i++){
+        ordPre[i]+=ordPre[i - 1] + arr[i];
+    }
+
+    int m;cin>>m;
+
+    while(m--){
+        int type,l,r;cin>>type>>l>>r;
+
+        if(type == 1){
+            ll res = unordPre[r] - unordPre[l - 1];
+
+            cout<<res<<"\n";
+        }else{
+            ll res = ordPre[r] - ordPre[l - 1];
+
+            cout<<res<<"\n";
+        }
+    }
+}
+
